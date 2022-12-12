@@ -1,0 +1,15 @@
+example:
+  echo:
+    cmd: echo Hello World!
+
+  print-and-echo:
+    cmd: echo Hello World!
+    print: 'True'
+
+  print-with-env-var:
+    cmd: echo Current user is $USER
+
+  print-with-input:
+    cmd: "echo Your input was: $text"
+    args: 
+      - text
