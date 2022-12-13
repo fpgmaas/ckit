@@ -3,7 +3,7 @@ from pathlib import Path
 
 import click
 
-from skate.config.common import get_global_commands_file_path
+from skate.config.common import get_global_commands_dir
 from skate.config.config import Config
 from skate.config.yaml_parser import YamlParser
 
@@ -27,9 +27,15 @@ class ConfigLoader:
         return Config(local_command_groups=local_command_groups, global_command_groups=global_command_groups)
 
     def _load_global(self):
-        global_commands_file_path = get_global_commands_file_path()
-        if global_commands_file_path.exists():
-            return YamlParser().parse(global_commands_file_path)
+        global_commands_dir = get_global_commands_dir()
+        global_command_groups = {}
+        if global_commands_dir.exists():
+            yaml_files = list(global_commands_dir.glob("*.yaml"))
+            if yaml_files:
+                for yaml_file in yaml_files:
+                    new_command_groups = YamlParser().parse(yaml_file)
+                    global_command_groups = {**global_command_groups, **new_command_groups}
+                return global_command_groups
         return {}
 
     def _load_local(self):

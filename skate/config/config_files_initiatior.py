@@ -3,15 +3,15 @@ from pathlib import Path
 
 import click
 
-from skate.config.common import get_global_commands_file_path
+from skate.config.common import get_global_commands_dir
 
 LOCAL_COMMANDS_YAML_DEFAULT = """example:
   echo:
     cmd: "echo Hello World!"
 
-  print-and-echo:
+  echo-without-print:
     cmd: "echo Hello World!"
-    print: 'True'
+    print: 'False'
 
   print-with-env-var:
     cmd: "echo Current user is $USER"
@@ -55,7 +55,7 @@ class ConfigFilesInitiator:
         Check if there is a global commands.yaml file. If it does not exist, ask the user if it should be created, and
         if so, create it.
         """
-        global_commands_file = get_global_commands_file_path()
+        global_commands_file = get_global_commands_dir() / "commands.yaml"
         if global_commands_file.exists():
             click.echo(f"{global_commands_file} already exists.")
         else:

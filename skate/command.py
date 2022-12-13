@@ -7,7 +7,7 @@ import click
 
 
 class Command:
-    def __init__(self, name: str, cmd: str | list(str), print: bool = False, args: list[str] = None) -> None:
+    def __init__(self, name: str, cmd: str | list(str), print: bool = True, args: list[str] = None) -> None:
         self.name = name
         self.cmd = cmd
         self.print = print
