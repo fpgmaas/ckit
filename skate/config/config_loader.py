@@ -1,27 +1,30 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from skate.command_group_master import CommandGroupMaster
+import click
+
 from skate.config.common import get_global_commands_file_path
+from skate.config.config import Config
 from skate.config.yaml_parser import YamlParser
 
 
 @dataclass
 class ConfigLoader:
-    def load(self) -> CommandGroupMaster:
+    load_local: bool = True
+    load_global: bool = True
+
+    def load(self) -> Config:
         """
         Check for the existence of local- and global configuration files, and if they do not exist,
         ask the user if they should be created.
         """
-        global_command_groups = self._load_global()
-        local_command_groups = self._load_local()
+        local_command_groups = self._load_local() if self.load_local else None
+        global_command_groups = self._load_global() if self.load_global else None
 
-        if not global_command_groups and not local_command_groups:
-            return None
+        if not local_command_groups and not global_command_groups:
+            click.echo("No configuration files were found. Did you initialize the application with `skate init`?")
 
-        return CommandGroupMaster(
-            local_command_groups=local_command_groups, global_command_groups=global_command_groups
-        )
+        return Config(local_command_groups=local_command_groups, global_command_groups=global_command_groups)
 
     def _load_global(self):
         global_commands_file_path = get_global_commands_file_path()

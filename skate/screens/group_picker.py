@@ -1,13 +1,10 @@
+from __future__ import annotations
+
 import curses
 from dataclasses import dataclass, field
 from typing import Optional
 
 from blessed import Terminal
-
-KEYS_ENTER = 1
-KEYS_UP = 2
-KEYS_DOWN = 238
-KEYS_SELECT = 3
 
 
 @dataclass
@@ -16,16 +13,30 @@ class TerminalLine:
     selectable: bool
     selected: bool = None
 
+    def select(self):
+        self.selected = True
+
+    def deselect(self):
+        self.selected = False
+
 
 @dataclass
 class GroupPicker:
     """
-    Modified from https://github.com/wong2/pick
+    Given some values in groups, pick a value from a group.
+
+    Example:
+
+        group, value = GroupPicker({"fruit": ["apple", "orange", "pear"], "animals": ["dog", "bear"]}).pick()
+
+    Args:
+        options: The options to pick from. Should be passed as a dict, where each key is the name of a group, and the
+            corresponding value for that entry should be a list of strings.
+        title: Optional, title to print aobve the prompt.
     """
 
     options: dict[str, list[str]]
     title: Optional[str] = None
-    index: int = field(init=False, default=0)
     lines: list[TerminalLine] = field(init=False, default=None)
 
     def __post_init__(self) -> None:
@@ -33,10 +44,10 @@ class GroupPicker:
         self.lines = []
         if self.title:
             self.lines += [TerminalLine(text, False) for text in self.title.split("\n") + [""]]
-        for key, value in self.options.items():
-            self.lines.append(TerminalLine(f"[{key}]", False))
-            for name in value:
-                self.lines.append(TerminalLine(name, True, False))
+        for group_name, list_of_values in self.options.items():
+            self.lines.append(TerminalLine(f"[{group_name}]", False))
+            for value in list_of_values:
+                self.lines.append(TerminalLine(value, True, False))
             self.lines.append(TerminalLine("", False))
 
         # Select the first selectable line.
@@ -52,8 +63,8 @@ class GroupPicker:
         selectable_lines = [line for line in self.lines if line.selectable]
         selected_line_index = self.get_index_of_selected_from_selectable()
         to_be_selected_index = (selected_line_index - 1) % len(selectable_lines)
-        selectable_lines[selected_line_index].selected = False
-        selectable_lines[to_be_selected_index].selected = True
+        selectable_lines[selected_line_index].deselect()
+        selectable_lines[to_be_selected_index].select()
 
     def select_next(self):
         """
@@ -62,8 +73,8 @@ class GroupPicker:
         selectable_lines = [line for line in self.lines if line.selectable]
         selected_line_index = self.get_index_of_selected_from_selectable()
         to_be_selected_index = (selected_line_index + 1) % len(selectable_lines)
-        selectable_lines[selected_line_index].selected = False
-        selectable_lines[to_be_selected_index].selected = True
+        selectable_lines[selected_line_index].deselect()
+        selectable_lines[to_be_selected_index].select()
 
     def get_index_of_selected_from_selectable(self):
         """
@@ -80,7 +91,10 @@ class GroupPicker:
         selected_line_index = [i for i, x in enumerate(self.lines) if x.selected][0]
         return selected_line_index
 
-    def get_selected(self) -> dict[str, str]:
+    def get_selected(self) -> tuple[str, str]:
+        """
+        Get the selected group and corresponding value.
+        """
         index = self.get_index_of_selected_from_selectable()
         for group, elements in self.options.items():
             if index >= len(elements):
@@ -90,8 +104,8 @@ class GroupPicker:
 
     def pick(self):
         term = Terminal()
-        while True:
-            with term.fullscreen(), term.cbreak(), term.hidden_cursor():
+        with term.fullscreen(), term.cbreak(), term.hidden_cursor():
+            while True:
                 # Start at 0,0
                 print(term.home(), end="")
 
@@ -106,11 +120,11 @@ class GroupPicker:
                 for line in self.lines[scroll_top : scroll_top + max_lines]:
                     if line.selectable:
                         if line.selected:
-                            print(f"> {term.orange}{line.text}{term.normal}")
+                            print(f"{term.clear_eol}> {term.orange}{line.text}{term.normal}")
                         else:
-                            print(f"  {line.text}")
+                            print(f"{term.clear_eol}  {line.text}")
                     else:
-                        print(line.text)
+                        print(f"{term.clear_eol} {line.text}")
 
                 # Listen for user input
                 val = term.inkey()
@@ -123,4 +137,5 @@ class GroupPicker:
 
 
 if __name__ == "__main__":
-    GroupPicker({"group": ["apple", "orange", "pear"], "other": ["dog", "bear"]}).pick()
+    k, v = GroupPicker({"fruit": ["apple", "orange", "pear"], "animals": ["dog", "bear"]}).pick()
+    print(k, v)

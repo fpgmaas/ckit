@@ -2,27 +2,23 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-import click
-
-from skate.config.config_loader import ConfigLoader
-from skate.screens.pick_command import CommandPicker
-from skate.screens.pick_group import GroupPicker
+from skate.config.config import Config
+from skate.screens.group_picker import GroupPicker
+from skate.screens.picker import Picker
 
 
 @dataclass
 class Core:
+    config: Config
+
     def run(self):
-        command_group_master = ConfigLoader().load()
-        if not command_group_master:
-            click.echo("No configuration files were found. Did you initialize the application with `skate init`?")
-        else:
-            all_command_group_names = command_group_master._get_command_group_names()
+        all_command_group_names = self.config.get_command_group_names()
 
-            local_or_global, command_group_name = GroupPicker(
-                all_command_group_names, "Please choose a command group."
-            ).pick()
+        local_or_global, command_group_name = GroupPicker(
+            all_command_group_names, "Please choose a command group."
+        ).pick()
 
-            command_group = command_group_master.get(local_or_global)[command_group_name]
-            choice, index = CommandPicker(list(command_group.get_command_names()), "Please choose a command.").start()
+        command_group = self.config.get(local_or_global)[command_group_name]
+        choice = Picker(list(command_group.get_command_names()), "Please choose a command.").pick()
 
-            command_group.get_command(choice).run()
+        command_group.get_command(choice).run()
