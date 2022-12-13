@@ -20,7 +20,7 @@ class Core:
 
             local_or_global, command_group_name = GroupPicker(
                 all_command_group_names, "Please choose a command group."
-            ).start()
+            ).pick()
 
             command_group = command_group_master.get(local_or_global)[command_group_name]
             choice, index = CommandPicker(list(command_group.get_command_names()), "Please choose a command.").start()

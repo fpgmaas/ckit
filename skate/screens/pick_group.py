@@ -81,7 +81,7 @@ class GroupPicker:
         return selected_line_index
 
     def get_selected(self) -> dict[str, str]:
-        index = self.lines.get_index_of_selected_from_selectable()
+        index = self.get_index_of_selected_from_selectable()
         for group, elements in self.options.items():
             if index >= len(elements):
                 index -= len(elements)
@@ -95,14 +95,14 @@ class GroupPicker:
                 # Start at 0,0
                 print(term.home(), end="")
 
+                # calculate how many lines we should scroll, relative to the top
                 max_lines = term.height - 1
                 index_selected = self.get_index_of_selected()
-
-                # calculate how many lines we should scroll, relative to the top
                 scroll_top = 0
                 if index_selected >= max_lines:
                     scroll_top = index_selected - max_lines + 1
 
+                # Print the lines
                 for line in self.lines[scroll_top : scroll_top + max_lines]:
                     if line.selectable:
                         if line.selected:
@@ -112,11 +112,14 @@ class GroupPicker:
                     else:
                         print(line.text)
 
+                # Listen for user input
                 val = term.inkey()
                 if val.code == curses.KEY_DOWN:
                     self.select_next()
                 if val.code == curses.KEY_UP:
                     self.select_prev()
+                if val.code == curses.KEY_ENTER:
+                    return self.get_selected()
 
 
 if __name__ == "__main__":

@@ -10,7 +10,6 @@ class TerminalLine:
     selected: bool = None
 
 
-
 term = Terminal()
 with term.fullscreen(), term.cbreak():
     print(term.home, end="")
