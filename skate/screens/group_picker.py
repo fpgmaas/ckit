@@ -35,6 +35,7 @@ class GroupPicker:
         title: Optional, title to print aobve the prompt.
     """
 
+    term: Terminal
     options: dict[str, list[str]]
     title: Optional[str] = None
     lines: list[TerminalLine] = field(init=False, default=None)
@@ -103,37 +104,36 @@ class GroupPicker:
                 return group, elements[index]
 
     def pick(self):
-        term = Terminal()
-        with term.fullscreen(), term.cbreak(), term.hidden_cursor():
-            while True:
-                # Start at 0,0
-                print(term.home(), end="")
+        while True:
+            # Start at 0,0
+            print(self.term.home(), end="")
 
-                # calculate how many lines we should scroll, relative to the top
-                max_lines = term.height - 1
-                index_selected = self.get_index_of_selected()
-                scroll_top = 0
-                if index_selected >= max_lines:
-                    scroll_top = index_selected - max_lines + 1
+            # calculate how many lines we should scroll, relative to the top
+            max_lines = self.term.height - 1
+            index_selected = self.get_index_of_selected()
+            scroll_top = 0
+            if index_selected >= max_lines:
+                scroll_top = index_selected - max_lines + 1
 
-                # Print the lines
-                for line in self.lines[scroll_top : scroll_top + max_lines]:
-                    if line.selectable:
-                        if line.selected:
-                            print(f"{term.clear_eol}> {term.orange}{line.text}{term.normal}")
-                        else:
-                            print(f"{term.clear_eol}  {line.text}")
+            # Print the lines
+            for line in self.lines[scroll_top : scroll_top + max_lines]:
+                if line.selectable:
+                    if line.selected:
+                        print(f"{self.term.clear_eol}> {self.term.orange}{line.text}{self.term.normal}")
                     else:
-                        print(f"{term.clear_eol} {line.text}")
+                        print(f"{self.term.clear_eol}  {line.text}")
+                else:
+                    print(f"{self.term.clear_eol} {line.text}")
 
-                # Listen for user input
-                val = term.inkey()
-                if val.code == curses.KEY_DOWN:
-                    self.select_next()
-                if val.code == curses.KEY_UP:
-                    self.select_prev()
-                if val.code == curses.KEY_ENTER:
-                    return self.get_selected()
+            # Listen for user input
+            val = self.term.inkey()
+            if val.code == curses.KEY_DOWN:
+                self.select_next()
+            if val.code == curses.KEY_UP:
+                self.select_prev()
+            if val.code == curses.KEY_ENTER:
+                print(self.term.clear(), end="")
+                return self.get_selected()
 
 
 if __name__ == "__main__":
