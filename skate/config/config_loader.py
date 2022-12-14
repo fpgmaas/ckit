@@ -27,6 +27,9 @@ class ConfigLoader:
         return Config(local_command_groups=local_command_groups, global_command_groups=global_command_groups)
 
     def _load_global(self):
+        """
+        Find all .yaml files in the global commands directory, and extract the command groups and their commands.
+        """
         global_commands_dir = get_global_commands_dir()
         global_command_groups = {}
         if global_commands_dir.exists():

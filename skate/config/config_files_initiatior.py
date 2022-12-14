@@ -9,17 +9,30 @@ LOCAL_COMMANDS_YAML_DEFAULT = """example:
   echo:
     cmd: "echo Hello World!"
 
-  echo-without-print:
+  command-without-echo:
     cmd: "echo Hello World!"
-    print: 'False'
+    echo: false
 
-  print-with-env-var:
+  command-with-env-var:
     cmd: "echo Current user is $USER"
 
-  print-with-input:
-    cmd: "echo Your input was: $text"
+  command-with-user-input:
+    cmd: "echo Hello! My name is: $name. My favourite fruit is: $fruit"
     args:
-      - text
+      - name
+      - fruit: apple
+
+  one-long-command:
+    cmd: "echo Lorem ipsum dolor sit amet,
+    consectetur adipiscing elit,
+    sed do eiusmod tempor incididunt"
+    echo: false
+
+  multiple-commands:
+    cmd:
+      - "echo Lorem ipsum dolor sit amet,"
+      - "echo consectetur adipiscing elit"
+    echo: false
 """
 
 GLOBAL_COMMANDS_YAML_DEFAULT = """git:
