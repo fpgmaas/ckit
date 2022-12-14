@@ -11,6 +11,7 @@ example:
 
   command-with-user-input:
     cmd: "echo Hello! My name is: $name. My favourite fruit is: $fruit"
+    echo: false
     args:
       - name
       - fruit: apple
@@ -23,6 +24,8 @@ example:
 
   multiple-commands:
     cmd: 
-      - "echo Lorem ipsum dolor sit amet,"
+      - "echo $name ipsum dolor sit amet,"
       - "echo consectetur adipiscing elit"
+    args:
+      - name: Lorem
     echo: false

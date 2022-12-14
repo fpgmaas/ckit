@@ -66,7 +66,8 @@ class Command:
         """
         For each argument, prompt the user for input, and then replace the matching string in the cmd.
         """
-        click.echo(f"Command to be run:\n\n{self.cmd}\n")
+        commands_formatted_to_print = "\n".join(self.cmd)
+        click.echo(f"Command{'s' if len(self.cmd) > 1 else ''} to be run:\n\n{commands_formatted_to_print}\n")
         for argument in self.arguments:
             value = click.prompt(
                 f"Please enter a value for argument `{argument.name}`", type=str, default=argument.default

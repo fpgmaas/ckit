@@ -18,6 +18,7 @@ LOCAL_COMMANDS_YAML_DEFAULT = """example:
 
   command-with-user-input:
     cmd: "echo Hello! My name is: $name. My favourite fruit is: $fruit"
+    echo: false
     args:
       - name
       - fruit: apple
