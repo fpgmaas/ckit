@@ -11,18 +11,15 @@
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/skate)](https://pypistats.org/packages/skate)
 [![License](https://img.shields.io/github/license/fpgmaas/skate)](https://img.shields.io/github/license/fpgmaas/skate)
 
+<br>
+
 _skate_ is a command line utility to help you organise and quickly run frequently used commands.
+
+<br>
 
 <p align="center">
 <img src="skate.gif"/>
 </p>
-
----
-<p align="center">
-  <a href = "https://fpgmaas.github.io/skate">Link to documentation</a>
-</p>
-
----
 
 ## Quickstart
 
