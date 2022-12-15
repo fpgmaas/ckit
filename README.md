@@ -15,8 +15,6 @@
 
 _skate_ is a command line utility to help you organise and quickly run frequently used commands.
 
-<br>
-
 <p align="center">
 <img src="skate.gif"/>
 </p>
