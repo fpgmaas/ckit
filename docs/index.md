@@ -5,7 +5,7 @@
 ---
 
 [![Release](https://img.shields.io/github/v/release/fpgmaas/skate)](https://img.shields.io/github/v/release/fpgmaas/skate)
-[![Build status](https://img.shields.io/github/workflow/status/fpgmaas/skate/Main/main)](https://github.com/fpgmaas/skate/actions/workflows/main.yml?query=branch%3Amain)
+[![Build status](https://img.shields.io/github/actions/workflow/status/fpgmaas/skate/main.yml?branch=main)](https://github.com/fpgmaas/skate/actions/workflows/main.yml?query=branch%3Amain)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/skate)](https://pypi.org/project/skate/)
 [![codecov](https://codecov.io/gh/fpgmaas/skate/branch/main/graph/badge.svg)](https://codecov.io/gh/fpgmaas/skate)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/skate)](https://pypistats.org/packages/skate)
