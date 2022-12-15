@@ -7,11 +7,8 @@ from skate.command_group import CommandGroup
 
 @dataclass
 class Config:
-    def __init__(
-        self, local_command_groups: dict[str, CommandGroup], global_command_groups: dict[str, CommandGroup]
-    ) -> None:
-        self.local_command_groups = local_command_groups
-        self.global_command_groups = global_command_groups
+    local_command_groups: dict[str, CommandGroup]
+    global_command_groups: dict[str, CommandGroup]
 
     def get(self, local_or_global: str):
         if local_or_global == "local":

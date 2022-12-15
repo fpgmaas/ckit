@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
+
 from skate.command import Command
 
 
+@dataclass
 class CommandGroup:
-    def __init__(self, commands: dict[str, Command]) -> None:
-        self.commands = commands
+    commands: dict[str, Command]
 
     def get_command_names(self):
         return self.commands.keys()

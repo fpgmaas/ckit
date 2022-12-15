@@ -8,14 +8,14 @@ from skate.command_group import CommandGroup
 
 
 class YamlParser:
+    """
+    Class to read command groups from a yaml file.
+    """
+
     def __init__(self):
         pass
 
     def parse(self, file: Path) -> dict[str, CommandGroup]:
-        """
-        Read command groups from a yaml file.
-        """
-
         with open(file, "rb") as f:
             command_groups_raw = yaml.load(f, Loader=SafeLoader)
 

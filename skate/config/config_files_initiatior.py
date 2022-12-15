@@ -5,7 +5,7 @@ import click
 
 from skate.config.common import get_global_commands_dir
 
-LOCAL_COMMANDS_YAML_DEFAULT = """example:
+COMMANDS_YAML_DEFAULT = """example:
   echo:
     cmd: "echo Hello World!"
 
@@ -27,18 +27,11 @@ LOCAL_COMMANDS_YAML_DEFAULT = """example:
     cmd: "echo Lorem ipsum dolor sit amet,
     consectetur adipiscing elit,
     sed do eiusmod tempor incididunt"
-    echo: false
 
   multiple-commands:
     cmd:
       - "echo Lorem ipsum dolor sit amet,"
       - "echo consectetur adipiscing elit"
-    echo: false
-"""
-
-GLOBAL_COMMANDS_YAML_DEFAULT = """git:
-  log:
-    cmd: "git log --all --oneline --graph --decorate"
 """
 
 
@@ -46,7 +39,7 @@ GLOBAL_COMMANDS_YAML_DEFAULT = """git:
 class ConfigFilesInitiator:
     def init(self):
         """
-        Check for the existence of local- and global configuration files, and if they do not exist,
+        Check for the existence of local- and global skate.yaml files, and if they do not exist,
         ask the user if they should be created.
         """
         self._init_global()
@@ -54,26 +47,26 @@ class ConfigFilesInitiator:
 
     def _init_local(self):
         """
-        Check if a commands.yaml file exists in the current directory. Otherwise, ask the user
+        Check if a skate.yaml file exists in the current directory. Otherwise, ask the user
         if it needs to be created, and if so; created it.
         """
-        if Path("commands.yaml").exists():
-            click.echo("A local commands.yaml already exists.")
+        if Path("skate.yaml").exists():
+            click.echo("A local skate.yaml already exists.")
         else:
-            if click.confirm("Create a commands.yaml file in the current directory?", default=True):
-                with open("commands.yaml", "w") as f:
-                    f.write(LOCAL_COMMANDS_YAML_DEFAULT)
+            if click.confirm("Create a skate.yaml file in the current directory?", default=True):
+                with open("skate.yaml", "w") as f:
+                    f.write(COMMANDS_YAML_DEFAULT)
 
     def _init_global(self):
         """
-        Check if there is a global commands.yaml file. If it does not exist, ask the user if it should be created, and
+        Check if there is a global skate.yaml file. If it does not exist, ask the user if it should be created, and
         if so, create it.
         """
-        global_commands_file = get_global_commands_dir() / "commands.yaml"
+        global_commands_file = get_global_commands_dir() / "skate.yaml"
         if global_commands_file.exists():
             click.echo(f"{global_commands_file} already exists.")
         else:
-            if click.confirm(f"Create a global commands.yaml file in {global_commands_file.parent}?", default=True):
+            if click.confirm(f"Create a global skate.yaml file in {global_commands_file.parent}?", default=True):
                 global_commands_file.parent.mkdir(parents=True, exist_ok=True)
                 with open(global_commands_file, "w") as f:
-                    f.write(GLOBAL_COMMANDS_YAML_DEFAULT)
+                    f.write(COMMANDS_YAML_DEFAULT)
