@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from skate.command import Command
+from peaks.command import Command
 
 
 @dataclass

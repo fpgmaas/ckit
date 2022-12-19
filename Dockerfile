@@ -16,6 +16,6 @@ COPY poetry.lock pyproject.toml /code/
 RUN poetry install --no-interaction --no-ansi --no-root --no-dev
 
 # Copy Python code to the Docker image
-COPY skate /code/skate/
+COPY peaks /code/peaks/
 
-CMD [ "python", "skate/foo.py"]
+CMD [ "python", "peaks/foo.py"]

@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import click
 
-from skate.config.config_files_initiatior import ConfigFilesInitiator
-from skate.config.config_loader import ConfigLoader
-from skate.core import Core
+from peaks.config.config_files_initiatior import ConfigFilesInitiator
+from peaks.config.config_loader import ConfigLoader
+from peaks.core import Core
 
 
 @click.group(invoke_without_command=True)
@@ -21,7 +21,7 @@ from skate.core import Core
     help="Boolean flag to only select a command from global files.",
 )
 @click.pass_context
-def skate(ctx, local_only: bool, global_only: bool) -> None:
+def peaks(ctx, local_only: bool, global_only: bool) -> None:
     if not ctx.invoked_subcommand:
         if local_only and global_only:
             raise ValueError(
@@ -32,6 +32,6 @@ def skate(ctx, local_only: bool, global_only: bool) -> None:
         Core(config).run()
 
 
-@skate.command()
+@peaks.command()
 def init():
     ConfigFilesInitiator().init()

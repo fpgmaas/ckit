@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from skate.config.common import get_global_commands_dir
-from skate.config.config import Config
-from skate.config.yaml_parser import YamlParser
+from peaks.config.common import get_global_commands_dir
+from peaks.config.config import Config
+from peaks.config.yaml_parser import YamlParser
 
 
 @dataclass
@@ -20,7 +20,7 @@ class ConfigLoader:
         global_command_groups = self._load_global() if self.load_global else None
 
         if not local_command_groups and not global_command_groups:
-            exit("No configuration files were found. Did you initialize the application with `skate init`?")
+            exit("No configuration files were found. Did you initialize the application with `peaks init`?")
 
         return Config(local_command_groups=local_command_groups, global_command_groups=global_command_groups)
 
@@ -40,6 +40,6 @@ class ConfigLoader:
         return {}
 
     def _load_local(self):
-        if Path("skate.yaml").exists():
-            return YamlParser().parse(Path("skate.yaml"))
+        if Path("peaks.yaml").exists():
+            return YamlParser().parse(Path("peaks.yaml"))
         return {}
