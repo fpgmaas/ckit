@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "geese"
-version = "0.0.2"
+name = "peaks"
+version = "0.0.1"
 description = "Organize and run frequently used commands"
 authors = ["Florian Maas <fpgmaas@gmail.com>"]
 repository = "https://github.com/fpgmaas/peaks"
