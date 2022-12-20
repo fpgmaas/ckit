@@ -1,10 +1,10 @@
-site_name: peaks
-repo_url: https://github.com/fpgmaas/peaks
-site_url: https://fpgmaas.github.io/peaks
+site_name: ckit
+repo_url: https://github.com/fpgmaas/ckit
+site_url: https://fpgmaas.github.io/ckit
 site_description: Organize and run frequently used commands
 site_author: Florian Maas
 edit_uri: edit/main/docs/
-repo_name: fpgmaas/peaks
+repo_name: fpgmaas/ckit
 copyright: Maintained by <a href="https://fpgmaas.com">Florian</a>.
 
 nav:
@@ -43,9 +43,9 @@ theme:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/fpgmaas/peaks
+      link: https://github.com/fpgmaas/ckit
     - icon: fontawesome/brands/python
-      link: https://pypi.com/project/peaks
+      link: https://pypi.com/project/ckit
 
 markdown_extensions:
   - toc:

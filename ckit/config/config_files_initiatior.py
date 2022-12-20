@@ -3,7 +3,7 @@ from pathlib import Path
 
 import click
 
-from peaks.config.common import get_global_commands_dir
+from ckit.config.common import get_global_commands_dir
 
 COMMANDS_YAML_DEFAULT = """example:
   echo:
@@ -39,7 +39,7 @@ COMMANDS_YAML_DEFAULT = """example:
 class ConfigFilesInitiator:
     def init(self):
         """
-        Check for the existence of local- and global peaks.yaml files, and if they do not exist,
+        Check for the existence of local- and global ckit.yaml files, and if they do not exist,
         ask the user if they should be created.
         """
         self._init_global()
@@ -47,26 +47,26 @@ class ConfigFilesInitiator:
 
     def _init_local(self):
         """
-        Check if a peaks.yaml file exists in the current directory. Otherwise, ask the user
+        Check if a ckit.yaml file exists in the current directory. Otherwise, ask the user
         if it needs to be created, and if so; created it.
         """
-        if Path("peaks.yaml").exists():
-            click.echo("A local peaks.yaml already exists.")
+        if Path("ckit.yaml").exists():
+            click.echo("A local ckit.yaml already exists.")
         else:
-            if click.confirm("Create a peaks.yaml file in the current directory?", default=True):
-                with open("peaks.yaml", "w") as f:
+            if click.confirm("Create a ckit.yaml file in the current directory?", default=True):
+                with open("ckit.yaml", "w") as f:
                     f.write(COMMANDS_YAML_DEFAULT)
 
     def _init_global(self):
         """
-        Check if there is a global peaks.yaml file. If it does not exist, ask the user if it should be created, and
+        Check if there is a global ckit.yaml file. If it does not exist, ask the user if it should be created, and
         if so, create it.
         """
-        global_commands_file = get_global_commands_dir() / "peaks.yaml"
+        global_commands_file = get_global_commands_dir() / "ckit.yaml"
         if global_commands_file.exists():
             click.echo(f"{global_commands_file} already exists.")
         else:
-            if click.confirm(f"Create a global peaks.yaml file in {global_commands_file.parent}?", default=True):
+            if click.confirm(f"Create a global ckit.yaml file in {global_commands_file.parent}?", default=True):
                 global_commands_file.parent.mkdir(parents=True, exist_ok=True)
                 with open(global_commands_file, "w") as f:
                     f.write(COMMANDS_YAML_DEFAULT)

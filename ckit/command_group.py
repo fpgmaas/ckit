@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from peaks.command import Command
+from ckit.command import Command
 
 
 @dataclass

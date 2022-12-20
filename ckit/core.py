@@ -4,9 +4,9 @@ from dataclasses import dataclass
 
 from blessed import Terminal
 
-from peaks.config.config import Config
-from peaks.screens.group_picker import GroupPicker
-from peaks.screens.picker import Picker
+from ckit.config.config import Config
+from ckit.screens.group_picker import GroupPicker
+from ckit.screens.picker import Picker
 
 
 @dataclass

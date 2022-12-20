@@ -1,9 +1,9 @@
 ## Configuration
 
-_peaks_ looks for configuration in the following two locations
+_ckit_ looks for configuration in the following two locations
 
-- From a `peaks.yaml` file in the current directory
-- From any `.yaml` file in the the global configuration directory, which is defaulted to `~/peaks`, but which can be overridden with the environment variable `peaks_HOME`.
+- From a `ckit.yaml` file in the current directory
+- From any `.yaml` file in the the global configuration directory, which is defaulted to `~/ckit`, but which can be overridden with the environment variable `ckit_HOME`.
 
 Each `.yaml` file can contain one or more command groups, each containg one or more commands
 

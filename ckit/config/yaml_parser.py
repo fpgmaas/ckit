@@ -3,8 +3,8 @@ from pathlib import Path
 import yaml
 from yaml.loader import SafeLoader
 
-from peaks.command import Command
-from peaks.command_group import CommandGroup
+from ckit.command import Command
+from ckit.command_group import CommandGroup
 
 
 class YamlParser:
