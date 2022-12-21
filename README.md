@@ -48,7 +48,7 @@ For more information, see the [documentation](https://fpgmaas.github.io/ckit/).
 _ckit_ can look for configuration in the following two locations:
 
 - In a `ckit.yaml` file in the current directory
-- In any `.yaml` file in the the global configuration directory, which is defaulted to `~/ckit`, but which can be overridden with the environment variable `ckit_HOME`.
+- In any `.yaml` file in the the global configuration directory, which is defaulted to `~/ckit`, but which can be overridden with the environment variable `CKIT_HOME`.
 
 An example `.yaml` file could look as follows:
 

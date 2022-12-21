@@ -13,7 +13,7 @@ def test_config_files_initiator(mock_click, tmp_path: Path) -> None:
     mock_click.return_value = "y"
 
     with run_within_dir(tmp_path):
-        os.environ["ckit_HOME"] = str(tmp_path / "ckit_home")
+        os.environ["CKIT_HOME"] = str(tmp_path / "CKIT_HOME")
         ConfigFilesInitiator().init()
 
         assert "ckit.yaml" in os.listdir()
@@ -21,7 +21,7 @@ def test_config_files_initiator(mock_click, tmp_path: Path) -> None:
             command_groups_raw = yaml.load(f, Loader=yaml.loader.SafeLoader)
             assert "example" in command_groups_raw
 
-        assert "ckit.yaml" in os.listdir("ckit_home")
-        with open("ckit_home/ckit.yaml", "rb") as f:
+        assert "ckit.yaml" in os.listdir("CKIT_HOME")
+        with open("CKIT_HOME/ckit.yaml", "rb") as f:
             command_groups_raw = yaml.load(f, Loader=yaml.loader.SafeLoader)
             assert "example" in command_groups_raw

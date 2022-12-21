@@ -5,6 +5,7 @@ import subprocess
 from dataclasses import dataclass
 
 import click
+import shlex
 
 
 @dataclass
@@ -56,7 +57,7 @@ class Command:
         for command in cmd:
             if self.echo:
                 click.echo(command)
-            subprocess.run(self._expand_env_vars(command).split(" "))
+            subprocess.run(shlex.split(self._expand_env_vars(command)))
 
     @staticmethod
     def _expand_env_vars(command):

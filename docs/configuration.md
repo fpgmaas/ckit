@@ -3,7 +3,7 @@
 _ckit_ looks for configuration in the following two locations
 
 - From a `ckit.yaml` file in the current directory
-- From any `.yaml` file in the the global configuration directory, which is defaulted to `~/ckit`, but which can be overridden with the environment variable `ckit_HOME`.
+- From any `.yaml` file in the the global configuration directory, which is defaulted to `~/ckit`, but which can be overridden with the environment variable `CKIT_HOME`.
 
 Each `.yaml` file can contain one or more command groups, each containg one or more commands
 
