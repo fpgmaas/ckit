@@ -29,7 +29,14 @@ class Command:
         if self.arguments:
             self._validate_arguments()
 
-    def _parse_arguments(self, args: list[str | dict[str, any]]):
+    def _parse_arguments(self, args: list[str | dict[str, any]]) -> list[Argument]:
+        """
+        Parse a list of argument definitions into Argument objects.
+
+        Args:
+            args: A list of either strings, or dictionaries. If the element is a string, it will be an argument without a default.
+                If it is a dict, the key will be the name of the argument, and the corresponding value will be the default.
+        """
         arguments = []
         for arg in args:
             if isinstance(arg, dict):
@@ -41,6 +48,9 @@ class Command:
         return arguments
 
     def _validate_arguments(self):
+        """
+        Validate that the arguments are actually used in the commands.
+        """
         for argument in self.arguments:
             if not any([f"${argument.name}" in command for command in self.cmd]):
                 click.echo(
@@ -57,10 +67,13 @@ class Command:
         for command in cmd:
             if self.echo:
                 click.echo(command)
-            subprocess.run(shlex.split(self._expand_env_vars(command)))
+            return subprocess.run(shlex.split(self._expand_env_vars(command)))
 
     @staticmethod
     def _expand_env_vars(command):
+        """
+        Replace environment variables with their values.
+        """
         return os.path.expandvars(command)
 
     def _prompt_and_replace_arguments(self, cmd):
