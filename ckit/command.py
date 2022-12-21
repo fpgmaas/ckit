@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import os
+import shlex
 import subprocess
 from dataclasses import dataclass
 
 import click
-import shlex
 
 
 @dataclass
