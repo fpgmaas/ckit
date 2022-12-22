@@ -67,7 +67,8 @@ class Command:
         for command in cmd:
             if self.echo:
                 click.echo(command)
-            return subprocess.run(shlex.split(self._expand_env_vars(command)))
+            proc = subprocess.run(shlex.split(self._expand_env_vars(command)))
+        return proc
 
     @staticmethod
     def _expand_env_vars(command):
