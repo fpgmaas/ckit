@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="ckit logo" width="460" height="300" src="https://raw.githubusercontent.com/fpgmaas/tmp/main/ckit-logo.svg">
+  <img alt="ckit logo" width="460" height="300" src="https://raw.githubusercontent.com/fpgmaas/ckit/main/docs/static/ckit-logo.svg">
 </p>
 
 ---
@@ -14,7 +14,7 @@
 _ckit_ is a command line utility to help you organise and quickly run frequently used commands.
 
 <p align="center">
-<img src="docs/ckit.gif"/>
+<img src="docs/static/ckit.gif"/>
 </p>
 
 ## Quickstart
