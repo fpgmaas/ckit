@@ -1,5 +1,5 @@
 <p align="center">
-  <h1>ckit</h1>
+  <img alt="ckit logo" width="460" height="300" src="https://raw.githubusercontent.com/fpgmaas/ckit/main/docs/static/ckit-logo.svg">
 </p>
 
 ---
