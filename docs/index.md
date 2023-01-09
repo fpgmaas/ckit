@@ -14,7 +14,7 @@
 _ckit_ is a command line utility to help you organise and quickly run frequently used commands.
 
 <p align="center">
-<img src="ckit.gif"/>
+<img src="static/ckit.gif"/>
 </p>
 
 ## Quickstart
