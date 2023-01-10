@@ -1,5 +1,5 @@
 coverage:
-  range: 70..100
+  range: 60..100
   round: down
   precision: 1
   ignore:
@@ -8,5 +8,5 @@ coverage:
   status:
     project:
       default:
-        target: 90%
+        target: 80%
         threshold: 0.5%

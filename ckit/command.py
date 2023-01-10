@@ -59,6 +59,9 @@ class Command:
                 )
 
     def run(self):
+        """
+        Run the command.
+        """
         cmd = self.cmd
 
         if self.arguments:
