@@ -33,7 +33,7 @@ To get started, run
 ckit init
 ```
 
-which will prompt to add a `ckit/ckit.yaml` file in the user's home directory (or the directory specified by the environment variable `CKIT_HOME`)for global commands, and/or a `ckit.yaml` file in the current directory for commands specific to the current project. 
+which will prompt to add a `ckit/ckit.yaml` file in the user's home directory (or the directory specified by the environment variable `CKIT_HOME`) for global commands, and/or a `ckit.yaml` file in the current directory for commands specific to the current project. 
 
 To use _ckit_ to run any of the pre-configured commands, simply run
 
