@@ -9,8 +9,8 @@ from ckit.command import Command
 class CommandGroup:
     commands: dict[str, Command]
 
-    def get_command_names(self):
+    def get_command_names(self) -> list[str]:
         return list(self.commands.keys())
 
-    def get_command(self, name: str):
+    def get_command(self, name: str) -> Command:
         return self.commands[name]
