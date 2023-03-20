@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -30,10 +31,14 @@ class ConfigLoader:
         """
         Find all .yaml files in the global commands directory, and extract the command groups and their commands.
         """
+        logging.debug("Loading the global configuration files.")
         global_commands_dir = get_global_commands_dir()
         global_command_groups = {}
         if global_commands_dir.exists():
-            yaml_files = list(global_commands_dir.glob("*.yaml"))
+            yaml_files = []
+            for extension in ["*.yaml", "*.yml"]:
+                yaml_files.extend(global_commands_dir.glob(extension))
+            logging.debug(f"Found the following global command files: {[str(file) for file in yaml_files]}")
             if yaml_files:
                 for yaml_file in yaml_files:
                     new_command_groups = YamlParser().parse(yaml_file)
@@ -42,6 +47,7 @@ class ConfigLoader:
         return {}
 
     def _load_local(self):
+        logging.debug("Loading the local configuration files.")
         if Path("ckit.yaml").exists():
             return YamlParser().parse(Path("ckit.yaml"))
         return {}
