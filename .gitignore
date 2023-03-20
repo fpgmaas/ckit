@@ -1,5 +1,7 @@
 docs/source
 ckit.yaml
+ckit2.yaml
+notebooks
 
 # From https://raw.githubusercontent.com/github/gitignore/main/Python.gitignore
 

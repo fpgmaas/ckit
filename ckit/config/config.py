@@ -2,19 +2,19 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from ckit.command_group import CommandGroup
+from ckit.group import Group
 
 
 @dataclass
 class Config:
-    local_command_groups: dict[str, CommandGroup]
-    global_command_groups: dict[str, CommandGroup]
+    local_groups: Group
+    global_groups: Group
 
     def get(self, local_or_global: str):
         if local_or_global == "local":
-            return self.local_command_groups
+            return self.local_groups
         elif local_or_global == "global":
-            return self.global_command_groups
+            return self.global_groups
         else:
             raise ValueError(f"local_or_global should be either 'local' or 'global', but found {local_or_global}")
 
@@ -28,8 +28,8 @@ class Config:
         }
         """
         result = {}
-        if self.local_command_groups:
-            result["local"] = list(self.local_command_groups.keys())
-        if self.global_command_groups:
-            result["global"] = list(self.global_command_groups.keys())
+        if self.local_groups:
+            result["local"] = list(self.local_groups.get_group_names())
+        if self.global_groups:
+            result["global"] = list(self.global_groups.get_group_names())
         return result

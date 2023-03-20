@@ -27,17 +27,17 @@ example2:
             f.write(local_config)
 
         config = ConfigLoader().load()
-        local_command_groups = config.get("local")
-        assert local_command_groups["example2"].get_command_names() == ["echo2"]
+        local_groups = config.get("local")
+        assert local_groups.get_group("example2").get_command_names() == ["echo2"]
 
-        global_command_groups = config.get("global")
-        print(global_command_groups)
-        assert global_command_groups["example"].get_command_names() == ["echo"]
+        global_groups = config.get("global")
+        print(global_groups)
+        assert global_groups.get_group("example").get_command_names() == ["echo"]
 
         config = ConfigLoader(load_global=False).load()
-        assert config.local_command_groups is not None
-        assert config.global_command_groups is None
+        assert config.local_groups is not None
+        assert config.global_groups is None
 
         config = ConfigLoader(load_local=False).load()
-        assert config.local_command_groups is None
-        assert config.global_command_groups is not None
+        assert config.local_groups is None
+        assert config.global_groups is not None
