@@ -22,7 +22,7 @@ def test_command_with_argument_with_default():
 
 
 def test_command_stops_running_on_error(capsys):
-    command = Command(name="test", cmd=["cd hatseflats", "echo Hello"])
+    command = Command(name="test", cmd=["echo123", "echo Hello"])
     output = command.run()
     assert "Hello" not in capsys.readouterr().out
     assert output.returncode != 0

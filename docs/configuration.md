@@ -5,14 +5,20 @@ _ckit_ looks for configuration in the following two locations
 - From a `ckit.yaml` file in the current directory
 - From any `.yaml` file in the the global configuration directory, which is defaulted to `~/ckit`, but which can be overridden with the environment variable `CKIT_HOME`.
 
-Each `.yaml` file can contain one or more command groups, each containg one or more commands
+Each `.yaml` file can contain one or more command groups, each containg one or more commands or other groups
 
 ```yaml
 group-1:
-  command-1:
-    ...
-  command-2:
-    ...
+  subgroup-1:
+    command-a:
+      ...
+    command-b:
+      ...
+  subgroup-2:
+    command-1:
+      ...
+    command-2:
+      ...
 group-2:
   command-a:
     ...
@@ -39,7 +45,7 @@ command:
     - "echo consectetur adipiscing elit"
 ```
 
-### echo
+### echo (Optional)
 
 A boolean flag. By default, commands are printed to the terminal before being run. This can be suppressed by passing `false` to this argument. Example:
 
@@ -49,7 +55,7 @@ command:
   echo: false
 ```
 
-### args
+### args (Optional)
 
 A list of arguments for the command. The user will be prompted for input before the command(s) specified in `cmd` will be run. The value of an argument named `name` will be made available as `$name` in the `cmd`. For example:
 
