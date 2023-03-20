@@ -92,3 +92,9 @@ class Command:
             )
             cmd = [command.replace(f"${argument.name}", value) for command in cmd]
         return cmd
+
+    def __repr__(self):
+        return f"Command `{self.name}`"
+
+    def __str__(self):
+        return f"Command {self.name} ---"
