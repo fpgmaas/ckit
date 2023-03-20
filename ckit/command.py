@@ -59,9 +59,6 @@ class Command:
                 )
 
     def run(self):
-        """
-        Run the command.
-        """
         cmd = self.cmd
 
         if self.arguments:
@@ -71,6 +68,9 @@ class Command:
             if self.echo:
                 click.echo(command)
             proc = subprocess.run(shlex.split(self._expand_env_vars(command)))
+            if proc.returncode:
+                # Stop running commands if a command fails.
+                break
         return proc
 
     @staticmethod
