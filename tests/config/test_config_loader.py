@@ -28,11 +28,11 @@ example2:
 
         config = ConfigLoader().load()
         local_groups = config.get("local")
-        assert local_groups.get_group("example2").get_command_names() == ["echo2"]
+        assert local_groups.get("example2").get_names() == ["echo2"]
 
         global_groups = config.get("global")
         print(global_groups)
-        assert global_groups.get_group("example").get_command_names() == ["echo"]
+        assert global_groups.get("example").get_names() == ["echo"]
 
         config = ConfigLoader(load_global=False).load()
         assert config.local_groups is not None
