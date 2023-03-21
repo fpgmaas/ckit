@@ -18,9 +18,9 @@ class Config:
         else:
             raise ValueError(f"local_or_global should be either 'local' or 'global', but found {local_or_global}")
 
-    def get_command_group_names(self):
+    def get_group_names(self):
         """
-        Return a dict with the command group names per local and global, e.g
+        Return a dict with the group names per local and global, e.g
 
         {
             "local" : ["docker", "git"],
@@ -29,7 +29,7 @@ class Config:
         """
         result = {}
         if self.local_groups:
-            result["local"] = list(self.local_groups.get_group_names())
+            result["local"] = list(self.local_groups.get_names())
         if self.global_groups:
-            result["global"] = list(self.global_groups.get_group_names())
+            result["global"] = list(self.global_groups.get_names())
         return result

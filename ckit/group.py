@@ -3,37 +3,52 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from ckit.command import Command
-from ckit.command_group import CommandGroup
 
 
 @dataclass
 class Group:
     """
     A Group object can hold either:
-    - other Groups (That in turn hold other Groups or CommandGroups)
-    - CommandGroups, that contain commands.
+    - Other Groups (That in turn hold other Groups or Commands)
+    - Commands
     """
 
-    groups: dict[str, Group | CommandGroup] = None
+    elements: dict[str, Group | Command] = None
 
     def __post_init__(self):
-        if not self.groups:
-            self.groups = {}
+        if not self.elements:
+            self.elements = {}
 
-    def get_group_names(self) -> list[str]:
-        return list(self.groups.keys())
+    def get_names(self) -> list[str]:
+        return list(self.elements.keys())
 
-    def get_group(self, name: str) -> Command:
-        return self.groups[name]
+    def get(self, name: str) -> Command:
+        return self.elements[name]
 
-    def add_group(self, name: str, group: Group | CommandGroup):
-        self.groups[name] = group
+    def add(self, name: str, element: Group):
+        self.elements[name] = element
 
     def join(self, group: Group):
-        self.groups = {**self.groups, **group.groups}
+        self.elements = {**self.elements, **group.elements}
+
+    def contains_only_commands(self):
+        return all(isinstance(el, Command) for el in self.elements.values())
+
+    def contains_only_groups(self):
+        return all(isinstance(el, Group) for el in self.elements.values())
+
+    def get_names_by_type(self):
+        """
+        Return a dict with keys 'groups' and 'commands', containing the names of the groups and commands
+        respectively.
+        """
+        return {
+            "groups": [k for k, v in self.elements.items() if isinstance(v, Group)],
+            "commands": [k for k, v in self.elements.items() if isinstance(v, Command)],
+        }
 
     def __repr__(self):
-        return "{" + "\n".join("{!r}: {!r},".format(k, v) for k, v in self.groups.items()) + "}"
+        return "{" + "\n".join("{!r}: {!r},".format(k, v) for k, v in self.elements.items()) + "}"
 
     def __str__(self):
-        return "{" + "\n".join("{!r}: {!r},".format(k, v) for k, v in self.groups.items()) + "}"
+        return "{" + "\n".join("{!r}: {!r},".format(k, v) for k, v in self.elements.items()) + "}"

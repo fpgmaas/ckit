@@ -20,5 +20,5 @@ group2:
             f.write(some_yaml)
 
         parsed_yaml = YamlParser().parse(filepath)
-        assert parsed_yaml.get_group("group1").get_command_names() == ["echo"]
-        assert parsed_yaml.get_group("group2").get_command_names() == ["echo"]
+        assert parsed_yaml.get("group1").get_names() == ["echo"]
+        assert parsed_yaml.get("group2").get_names() == ["echo"]
