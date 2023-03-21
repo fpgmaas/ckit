@@ -34,6 +34,19 @@ COMMANDS_YAML_DEFAULT = """example:
     cmd:
       - "echo Lorem ipsum dolor sit amet,"
       - "echo consectetur adipiscing elit"
+
+example-groups:
+  group1:
+    hello:
+      cmd: "echo Hello World from group 1!"
+      echo: false
+  group2:
+    hello:
+      cmd: "echo Hello World from group 2!"
+      echo: false
+  hello:
+      cmd: "echo Hello World!"
+      echo: false
 """
 
 
