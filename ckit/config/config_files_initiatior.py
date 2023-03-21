@@ -25,6 +25,14 @@ COMMANDS_YAML_DEFAULT = """example:
       - name
       - fruit: apple
 
+  command-with-boolean:
+    cmd: "ls $detailed"
+    echo: false
+    booleans:
+      - detailed:
+          prompt: Show details?
+          if_true: -lh
+
   one-long-command:
     cmd: "echo Lorem ipsum dolor sit amet,
     consectetur adipiscing elit,

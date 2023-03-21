@@ -10,8 +10,12 @@ group1:
   echo:
     cmd: "echo Hello World!"
 group2:
-  echo:
-    cmd: "echo Hello World!"
+  subgroup-a:
+    echo:
+      cmd: "echo Hello World!"
+  subgroup-b:
+    echo:
+      cmd: "echo Hello World!"
 """
 
     with run_within_dir(tmp_path):
@@ -21,4 +25,4 @@ group2:
 
         parsed_yaml = YamlParser().parse(filepath)
         assert parsed_yaml.get("group1").get_names() == ["echo"]
-        assert parsed_yaml.get("group2").get_names() == ["echo"]
+        assert parsed_yaml.get("group2").get_names() == ["subgroup-a", "subgroup-b"]

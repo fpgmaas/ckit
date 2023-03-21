@@ -66,11 +66,38 @@ command:
     - name
 ```
 
-Arguments can be given a defalt value as follows:
+Arguments can be given a default value as follows:
 
 ```yaml
 command:
   cmd: "echo My name is $name"
   args:
     - name: "Calvin"
+```
+
+### booleans (Optional)
+
+A list of boolean arguments for the command, where the value in the command will depend on a `Y/N` prompt before the command(s) specified in `cmd` will be run. The value of a boolean argument named `name` will replace `$name` in the `cmd`. For example:
+
+```yaml
+  command-with-boolean:
+    cmd: "ls $detailed"
+    booleans:
+      - detailed:
+          prompt: "Show details?"
+          if_true: -lh
+```
+
+By default, the value that is passed when the user chooses `N` is `""`. This can be changed with the `if_false` argument. The default choice can be changed from `Y` to `N` with the `default` argument. See the following example:
+
+```yaml
+  command-with-boolean:
+    cmd: "echo I like $fruit"
+    echo: false
+    booleans:
+      - fruit:
+          prompt: "Do you like apples (y) or pears (n)?"
+          if_true: apples
+          if_false: pears
+          default: false
 ```
