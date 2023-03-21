@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import os
-import shlex
 import subprocess
 from dataclasses import dataclass
 
@@ -108,7 +107,7 @@ class Command:
         for command in cmd:
             if self.echo:
                 click.echo(command)
-            proc = subprocess.run(shlex.split(self._expand_env_vars(command)))
+            proc = subprocess.run(self._expand_env_vars(command), shell=True)
             if proc.returncode:
                 # Stop running commands if a command fails.
                 break
