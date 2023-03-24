@@ -38,7 +38,7 @@ class ConfigLoader:
         if global_commands_dir.exists():
             yaml_files = []
             for extension in ["*.yaml", "*.yml"]:
-                yaml_files.extend(global_commands_dir.glob(extension))
+                yaml_files.extend(global_commands_dir.rglob(extension))
             logging.debug(f"Found the following global command files: {[str(file) for file in yaml_files]}")
             if yaml_files:
                 for yaml_file in yaml_files:
