@@ -17,6 +17,13 @@ _ckit_ is a command line utility to help you organise and quickly run frequently
 <img src="docs/static/ckit.gif"/>
 </p>
 
+---
+<p align="center">
+  <a href="https://fpgmaas.github.io/ckit">Documentation</a> - <a href="https://github.com/fpgmaas/ckit-files/">Example configuration files</a>
+</p>
+
+---
+
 ## Quickstart
 
 ### Installation
