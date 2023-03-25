@@ -68,6 +68,24 @@ def ckit(ctx, local_only: bool, global_only: bool) -> None:
         Core(config).run()
 
 
+@click.option(
+    "--download-global-defaults",
+    is_flag=True,
+    help="""Boolean flag. If set, instead of creating an example ckit.yaml in the global configuration directory, will prompt to download the files
+    from the `ckit-files` repository to the global configuration repository instead.""",
+)
+@click.option(
+    "--skip-local",
+    is_flag=True,
+    help="Boolean flag to indicate that we do not want to initialize a local configuration file.",
+)
+@click.option(
+    "--skip-global",
+    is_flag=True,
+    help="Boolean flag to indicate that we do not want to initialize global configuration files.",
+)
 @ckit.command()
-def init():
-    ConfigFilesInitiator().init()
+def init(download_global_defaults: bool, skip_local: bool, skip_global: bool):
+    ConfigFilesInitiator(
+        download_global_defaults=download_global_defaults, skip_global=skip_global, skip_local=skip_local
+    ).init()
